@@ -10,6 +10,6 @@ namespace GoLogData.Data
             : base(options)
         {
         }
-        public DbSet<GoLogData.Models.Databook> Databook { get; set; }
+        public DbSet<GoLogData.Models.Databooks> Databook { get; set; }
     }
 }
