@@ -54,7 +54,7 @@ namespace GoLogData.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] Databook databook)
+        public async Task<IActionResult> Create( Databooks databook)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace GoLogData.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id")] Databook databook)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id")] Databooks databook)
         {
             if (id != databook.Id)
             {
