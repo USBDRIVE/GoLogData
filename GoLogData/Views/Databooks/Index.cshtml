@@ -13,10 +13,22 @@
             <th></th>
         </tr>
     </thead>
-
-        <div class="card-deck">
+    <div class="container">
+        <div class="card-columns" style="
+            @if(Model.Count() == 0){<text>column-count: 1;</text>}
+            //checking how many databooks users have and displaying css properly
+            else if(Model.Count() == 1){<text>column-count: 2;</text>}
+            else if(Model.Count() == 2){<text>column-count: 3;</text>}
+            else{<text>column-count: 4;</text>}">
             @foreach (var item in Model) {             
-                <div class="card">
+                <div class="card" style="width: 18rem; height: 18rem;">
+                    <div class="card-header">@item.Title</div>
+                    <div class="card-body">
+                        <div class="card-text" style="text-align: center;">
+                            <h6>@item.Description</h6>
+
+                        </div>
+                    </div>
 
                 </div>
                 
@@ -38,8 +50,9 @@
                 </div>
             </div>
         </div>
+      </div>
 
-        </>
+       
          
           
     </tbody>
