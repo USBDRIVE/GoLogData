@@ -1,14 +1,24 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using GoLogData.Data;
+using GoLogData.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GoLogData.Controllers
 {
     public class ParentViewModelController : Controller
     {
-        // GET: HomeController1
-        public ActionResult Index()
+
+        private readonly ApplicationDbContext _context;
+        public ParentViewModelController(ApplicationDbContext context)
         {
-            return View();
+            _context = context;
+        }
+        // GET: HomeController1
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.ParentViewModels.ToListAsync());
+            // return View();
         }
 
         // GET: HomeController1/Details/5
@@ -26,16 +36,25 @@ namespace GoLogData.Controllers
         // POST: HomeController1/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(ParentViewModel parentViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
+                parentViewModel.ParentViewModelId = Guid.NewGuid();
+                parentViewModel.Databook = new Databooks()
+                {
+                   
+                    Title = parentViewModel.Databook.Title,
+                    Color = parentViewModel.Databook.Color,
+                    Description = parentViewModel.Databook.Description
+                };
+                
+                _context.Add(parentViewModel.Databook);
+                _context.Add(parentViewModel);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(parentViewModel);
         }
 
         // GET: HomeController1/Edit/5

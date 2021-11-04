@@ -4,6 +4,7 @@ using GoLogData.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoLogData.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211029194216_nullableDataModel")]
+    partial class nullableDataModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,55 +45,6 @@ namespace GoLogData.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Databook");
-                });
-
-            modelBuilder.Entity("GoLogData.Models.DataModel", b =>
-                {
-                    b.Property<Guid>("ModelId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("DatabookId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Label")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ModelId");
-
-                    b.HasIndex("DatabookId");
-
-                    b.ToTable("DataModels");
-                });
-
-            modelBuilder.Entity("GoLogData.Models.ParentViewModel", b =>
-                {
-                    b.Property<Guid>("ParentViewModelId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("DataModelModelId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("DatabookId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ParentViewModelId");
-
-                    b.HasIndex("DataModelModelId");
-
-                    b.HasIndex("DatabookId");
-
-                    b.ToTable("ParentViewModels");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -294,34 +247,6 @@ namespace GoLogData.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("GoLogData.Models.DataModel", b =>
-                {
-                    b.HasOne("GoLogData.Models.Databooks", "Databooks")
-                        .WithMany()
-                        .HasForeignKey("DatabookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Databooks");
-                });
-
-            modelBuilder.Entity("GoLogData.Models.ParentViewModel", b =>
-                {
-                    b.HasOne("GoLogData.Models.DataModel", "DataModel")
-                        .WithMany()
-                        .HasForeignKey("DataModelModelId");
-
-                    b.HasOne("GoLogData.Models.Databooks", "Databook")
-                        .WithMany()
-                        .HasForeignKey("DatabookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DataModel");
-
-                    b.Navigation("Databook");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

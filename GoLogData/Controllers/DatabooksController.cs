@@ -54,17 +54,17 @@ namespace GoLogData.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( Databooks databook)
-        {
-            if (ModelState.IsValid)
-            {
-                databook.Id = Guid.NewGuid();
-                _context.Add(databook);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(databook);
-        }
+        //public async Task<IActionResult> Create( Databooks databook)
+        //{
+        //  if (ModelState.IsValid)
+        //{
+        // databook.Id = Guid.NewGuid();
+        //_context.Add(databook);
+        //await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //}
+        //       return View(databook);
+        //}
 
         // GET: Databooks/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
