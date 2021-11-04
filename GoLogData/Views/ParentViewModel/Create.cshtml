@@ -1,0 +1,48 @@
+﻿@model GoLogData.Models.ParentViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create a new databook</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">  
+        <form method="post" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label style="font-bold" asp-for="Databook.Title"></label>
+                <br />
+                <input asp-for="Databook.Title" />
+                <span asp-validation-for="Databook.Title"></span>
+                <br />
+                
+                <label style="font-bold" asp-for="Databook.Description"></label>
+                <br />
+                
+                <textarea asp-for="Databook.Description" rows="10" cols="30"></textarea>
+                <span asp-validation-for="Databook.Description"></span>
+                <br />
+                
+                <label style="font-bold" asp-for="Databook.Color"></label>
+                <br />
+
+                <input type="color" value="#ff0000" asp-for="Databook.Color" />
+                <span asp-validation-for="Databook.Color"></span>
+                <br />
+                
+                
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
