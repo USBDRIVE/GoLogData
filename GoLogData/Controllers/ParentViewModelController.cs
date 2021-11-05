@@ -48,8 +48,19 @@ namespace GoLogData.Controllers
                     Color = parentViewModel.Databook.Color,
                     Description = parentViewModel.Databook.Description
                 };
+                //every databook to have a default basic datamodel
+                parentViewModel.DataModel = new DataModel()
+                {
+                    Databooks = parentViewModel.Databook,
+                    Title = "default",
+                    Label = "default label",
+                    Description = "This is the default data model",
+                    ModelId = Guid.NewGuid()
+
+                };
                 
                 _context.Add(parentViewModel.Databook);
+                _context.Add(parentViewModel.DataModel);
                 _context.Add(parentViewModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
