@@ -59,8 +59,8 @@ namespace GoLogData.Controllers
 
                 };
                 
-                _context.Add(parentViewModel.Databook);
-                _context.Add(parentViewModel.DataModel);
+                //_context.Add(parentViewModel.Databook);
+                //_context.Add(parentViewModel.DataModel);
                 _context.Add(parentViewModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

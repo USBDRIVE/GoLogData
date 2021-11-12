@@ -54,7 +54,7 @@
                    <td>@databook.Description</td>
                    <td>
                        <a class="btn btn-primary" asp-route-id="@databook.Id" asp-route-previousUrl="@previousUrl" asp-Controller="" asp-action="">View Databook</a>
-                       <a class="btn btn-secondary" asp-route-id="@databook.Id" asp-action="Edit">Edit Databook</a>
+                       <a class="btn btn-secondary" asp-controller="ParentViewModel" asp-route-id="@databook.Id" asp-action="Edit">Edit Databook</a>
                        <a class="btn btn-danger" asp-route-id="@databook.Id" asp-action="Delete">Delete Databook</a>
                    </td>
                </tr>   
