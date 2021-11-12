@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GoLogData.Models.Databooks>
+﻿@model IEnumerable<GoLogData.Models.ParentViewModel>
 @inject IHttpContextAccessor http;
 
 @{
@@ -50,15 +50,17 @@
               string previousUrl = http.HttpContext.Request.Path;
               
           }
-          @foreach (Databooks databook in Model)
+          @foreach (ParentViewModel parentViewModel in Model)
           {
+              //QUERY DATABASE for databook with parentViewModel.DatabookId 
+              //string query = "Select Databook.Title, Databook.Description From Databook Where Databook.Id = " + parentViewModel.D
                <tr>
-                   <td>@databook.Title</td>
-                   <td>@databook.Description</td>
+                   <td>@parentViewModel.Databook.Title</td>
+                   <td>@parentViewModel.Databook.Description</td>
                    <td>
-                       <a class="btn btn-primary" asp-route-id="@databook.Id" asp-route-previousUrl="@previousUrl" asp-Controller="" asp-action="">View Databook</a>
-                       <a class="btn btn-secondary" asp-route-id="@databook.Id" asp-action="Edit">Edit Databook</a>
-                       <a class="btn btn-danger" asp-route-id="@databook.Id" asp-action="Delete">Delete Databook</a>
+                       <a class="btn btn-primary" asp-route-id="@parentViewModel.Databook.Id" asp-route-previousUrl="@previousUrl" asp-Controller="" asp-action="">View Databook</a>
+                       <a class="btn btn-secondary" asp-route-id="@parentViewModel.Databook.Id" asp-action="Edit">Edit Databook</a>
+                       <a class="btn btn-danger" asp-route-id="@parentViewModel.Databook.Id" asp-action="Delete">Delete Databook</a>
                    </td>
                </tr>   
           }
