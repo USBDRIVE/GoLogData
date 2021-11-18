@@ -36,6 +36,9 @@ namespace GoLogData.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("MultipleModels")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -79,10 +82,10 @@ namespace GoLogData.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("DataModelModelId")
+                    b.Property<Guid?>("DataModelModelId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("DatabookId")
+                    b.Property<Guid?>("DatabookId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ParentViewModelId");
@@ -311,15 +314,11 @@ namespace GoLogData.Data.Migrations
                 {
                     b.HasOne("GoLogData.Models.DataModel", "DataModel")
                         .WithMany()
-                        .HasForeignKey("DataModelModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DataModelModelId");
 
                     b.HasOne("GoLogData.Models.Databooks", "Databook")
                         .WithMany()
-                        .HasForeignKey("DatabookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DatabookId");
 
                     b.Navigation("DataModel");
 
