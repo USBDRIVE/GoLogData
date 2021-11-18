@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoLogData.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211111185204_notnullDatabook")]
-    partial class notnullDatabook
+    [Migration("20211118204827_booleandatamodel")]
+    partial class booleandatamodel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,6 +37,9 @@ namespace GoLogData.Data.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("MultipleModels")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -81,10 +84,10 @@ namespace GoLogData.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("DataModelModelId")
+                    b.Property<Guid?>("DataModelModelId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("DatabookId")
+                    b.Property<Guid?>("DatabookId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ParentViewModelId");
@@ -313,15 +316,11 @@ namespace GoLogData.Data.Migrations
                 {
                     b.HasOne("GoLogData.Models.DataModel", "DataModel")
                         .WithMany()
-                        .HasForeignKey("DataModelModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DataModelModelId");
 
                     b.HasOne("GoLogData.Models.Databooks", "Databook")
                         .WithMany()
-                        .HasForeignKey("DatabookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DatabookId");
 
                     b.Navigation("DataModel");
 
