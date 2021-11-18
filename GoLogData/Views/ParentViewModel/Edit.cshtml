@@ -1,7 +1,14 @@
-﻿@model GoLogData.Models.Databooks
+﻿@using GoLogData.Data
+@using Microsoft.Data.SqlClient
+@using Microsoft.EntityFrameworkCore.Storage
+@model GoLogData.Models.ParentViewModel
 
 
+@{
+    //cast viewdata as list
+    var dataModelList = ViewData["dataModels"] as List<DataModel>;
 
+}
 <h1>Edit</h1>
 
 <h4>Databook</h4>
@@ -10,14 +17,37 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <table class="table">
+                <thead>DataModels</thead>
+                <tbody>
+                   @foreach (var item in dataModelList)
+                   {
+                     <tr>
+                       <td>@item.Label</td>
+                       <td>@item.Description</td>
+                       <td>
+                           <a class="btn btn-primary" asp-controller="DataModel" asp-action="Add">Add</a>
+                           <a class="btn btn-danger" asp-controller="DataModel" asp-action="Delete">Delete</a>
+                           
+                       </td>
+                     </tr>
+                   }
+
+                </tbody>
+            </table>
+
+
+            <!--
+            <input type="hidden" asp-for="Databook.Id" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
                 <button type="button"  class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newModelModal">New Data Model<script>console.log("clicked");</script></button>
             </div>
+            -->
         </form>
     </div>
 </div>
+<!--
 <div class="modal fade" id="newModelModal" tabindex="-1" role="dialog" aria-labelledby="newModelModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -27,17 +57,32 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="body">
+            <div class="body" id="modalBody">
+                <form method="post"  asp-action="Create">
+                    <div class="form-group">
+                        <br />
+                        <label style="font-bold" asp-for="DataModel.Title">DataModel Title</label>
+                        <br />
+                        <input asp-for="DataModel.Title" />
+                        <span asp-validation-for="DataModel.Title"></span>
+                        <br />
+                        <label style="font-bold"  asp-for="DataModel.Description"></label>
+                        <br />
+                        <input asp-for="DataModel.Description" />
+                        <span asp-validation-for="DataModel.Description"></span>
+                    </div>
+                </form>
                 
             </div>
             <div class="modal-footer">
                 
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" asp-controller="DataModel" value="Create" class="btn btn-primary">Create Model</button>
             </div>
         </div>
     </div>
 </div>
+-->
 
 <div>
     <a asp-action="Index">Back to List</a>

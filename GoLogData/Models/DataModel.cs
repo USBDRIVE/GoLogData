@@ -14,7 +14,6 @@ namespace GoLogData.Models
         public string Title { get; set; }
         public string Label { get; set; }
         public string Description { get; set; }
-        //In need of primary key, since EF igonores read-only properties This will work fine
         [Key]
         public Guid ModelId { get; set; }
     }

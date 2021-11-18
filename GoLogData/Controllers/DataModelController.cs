@@ -1,10 +1,19 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using GoLogData.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoLogData.Controllers
 {
     public class DataModelController : Controller
     {
+        private readonly ApplicationDbContext _context;
+        public DataModelController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+
+
         // GET: DataModelController
         public ActionResult Index()
         {
@@ -13,6 +22,10 @@ namespace GoLogData.Controllers
 
         // GET: DataModelController/Details/5
         public ActionResult Details(int id)
+        {
+            return View();
+        }
+        public ActionResult Add(Guid id)
         {
             return View();
         }
@@ -39,7 +52,7 @@ namespace GoLogData.Controllers
         }
 
         // GET: DataModelController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
             return View();
         }
