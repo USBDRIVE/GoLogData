@@ -43,7 +43,6 @@ namespace GoLogData.Controllers
                 parentViewModel.ParentViewModelId = Guid.NewGuid();
                 parentViewModel.Databook = new Databooks()
                 {
-                   
                     Title = parentViewModel.Databook.Title,
                     Color = parentViewModel.Databook.Color,
                     Description = parentViewModel.Databook.Description
@@ -69,8 +68,25 @@ namespace GoLogData.Controllers
         }
 
         // GET: HomeController1/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(Guid id)
         {
+            
+           
+
+            await using (var context = _context)
+            {
+                var query = from dm in context.DataModels
+                            where dm.Databooks.Id == id 
+                            select dm;
+                //get DataModel where datamodel.DatabookId = id 
+                List<DataModel> answer = query.ToList<DataModel>();
+                
+                ViewData["dataModels"] = answer;
+
+            }
+            
+
+            
             return View();
         }
 
