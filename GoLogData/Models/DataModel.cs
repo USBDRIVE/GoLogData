@@ -17,4 +17,14 @@ namespace GoLogData.Models
         [Key]
         public Guid ModelId { get; set; }
     }
+    public class DataCell
+    {
+        [ForeignKey ("ModelId")]
+        public DataModel? Model { get; set; }
+
+        public int DataInput { get; set; }
+        [Key]
+        public Guid DataCellId { get; set; }
+
+    }
 }

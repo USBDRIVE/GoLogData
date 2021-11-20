@@ -1,54 +1,29 @@
-﻿using GoLogData.Data;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoLogData.Controllers
 {
-    public class DataModelController : Controller
+    public class DataCellController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        public DataModelController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-
-
-        // GET: DataModelController
+        // GET: DataCellController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: DataModelController/Details/5
+        // GET: DataCellController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
-        public ActionResult AddModel(Guid id)
-        {
-            return View();
-        }
-        public async Task<IActionResult> AddData(Guid id)
-        {
-            await using(var context = _context)
-            {
-                var query = from dm in context.DataModels
-                            where dm.ModelId == id
-                            select dm;
-                ViewData["DataModel"] = query;
-            }
 
-            return View();
-        }
-
-        // GET: DataModelController/Create
+        // GET: DataCellController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: DataModelController/Create
+        // POST: DataCellController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -63,13 +38,13 @@ namespace GoLogData.Controllers
             }
         }
 
-        // GET: DataModelController/Edit/5
-        public ActionResult Edit(Guid id)
+        // GET: DataCellController/Edit/5
+        public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: DataModelController/Edit/5
+        // POST: DataCellController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -84,13 +59,13 @@ namespace GoLogData.Controllers
             }
         }
 
-        // GET: DataModelController/Delete/5
+        // GET: DataCellController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: DataModelController/Delete/5
+        // POST: DataCellController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

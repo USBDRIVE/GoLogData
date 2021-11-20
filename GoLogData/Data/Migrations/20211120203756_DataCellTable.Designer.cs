@@ -4,6 +4,7 @@ using GoLogData.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoLogData.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211120203756_DataCellTable")]
+    partial class DataCellTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,25 +48,6 @@ namespace GoLogData.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Databook");
-                });
-
-            modelBuilder.Entity("GoLogData.Models.DataCell", b =>
-                {
-                    b.Property<Guid>("DataCellId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("DataInput")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("ModelId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("DataCellId");
-
-                    b.HasIndex("ModelId");
-
-                    b.ToTable("DataCell");
                 });
 
             modelBuilder.Entity("GoLogData.Models.DataModel", b =>
@@ -101,9 +84,6 @@ namespace GoLogData.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CellDataCellId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("DataModelModelId")
                         .HasColumnType("uniqueidentifier");
 
@@ -111,8 +91,6 @@ namespace GoLogData.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ParentViewModelId");
-
-                    b.HasIndex("CellDataCellId");
 
                     b.HasIndex("DataModelModelId");
 
@@ -323,15 +301,6 @@ namespace GoLogData.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("GoLogData.Models.DataCell", b =>
-                {
-                    b.HasOne("GoLogData.Models.DataModel", "Model")
-                        .WithMany()
-                        .HasForeignKey("ModelId");
-
-                    b.Navigation("Model");
-                });
-
             modelBuilder.Entity("GoLogData.Models.DataModel", b =>
                 {
                     b.HasOne("GoLogData.Models.Databooks", "Databooks")
@@ -345,10 +314,6 @@ namespace GoLogData.Data.Migrations
 
             modelBuilder.Entity("GoLogData.Models.ParentViewModel", b =>
                 {
-                    b.HasOne("GoLogData.Models.DataCell", "Cell")
-                        .WithMany()
-                        .HasForeignKey("CellDataCellId");
-
                     b.HasOne("GoLogData.Models.DataModel", "DataModel")
                         .WithMany()
                         .HasForeignKey("DataModelModelId");
@@ -356,8 +321,6 @@ namespace GoLogData.Data.Migrations
                     b.HasOne("GoLogData.Models.Databooks", "Databook")
                         .WithMany()
                         .HasForeignKey("DatabookId");
-
-                    b.Navigation("Cell");
 
                     b.Navigation("DataModel");
 

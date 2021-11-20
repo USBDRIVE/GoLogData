@@ -1,7 +1,9 @@
-﻿@model GoLogData.Models.DataModel
+﻿@using GoLogData.Models
+@model GoLogData.Models.DataModel
 
 @{
     ViewData["Title"] = "Add Data";
+    var CurrentDataModel = ViewData["DataModel"] as DataModel;
 }
 
 <h1>AddData</h1>
@@ -11,8 +13,9 @@
     <div class="col-md-4">
         <form asp-action="AddData">
            <div class="form-group">
-               <label style="font-bold" asp-for"">@Model.Label</label>
+               <label style="font-bold">@CurrentDataModel.Label</label>
                <br />
+               
 
            </div>
         </form>
