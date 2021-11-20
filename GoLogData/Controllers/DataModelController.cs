@@ -25,7 +25,11 @@ namespace GoLogData.Controllers
         {
             return View();
         }
-        public ActionResult Add(Guid id)
+        public ActionResult AddModel(Guid id)
+        {
+            return View();
+        }
+        public ActionResult AddData(Guid id)
         {
             return View();
         }

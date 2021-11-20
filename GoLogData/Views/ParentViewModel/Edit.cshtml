@@ -9,7 +9,13 @@
     var dataModelList = ViewData["dataModels"] as List<DataModel>;
 
 }
-<h1>Edit</h1>
+<div>
+    <h1>Edit</h1>
+    <div style="right: 150px">
+        <a asp-controller="DataModel" asp-action="AddModel">Add a new DataModel</a>
+
+    </div>
+</div>
 
 <h4>Databook</h4>
 <hr />
@@ -26,7 +32,7 @@
                        <td>@item.Label</td>
                        <td>@item.Description</td>
                        <td>
-                           <a class="btn btn-primary" asp-controller="DataModel" asp-action="Add">Add</a>
+                           <a class="btn btn-primary" asp-controller="DataModel" asp-action="AddData">Add</a>
                            <a class="btn btn-danger" asp-controller="DataModel" asp-action="Delete">Delete</a>
                            
                        </td>
