@@ -43,6 +43,7 @@ namespace GoLogData.Controllers
                 parentViewModel.ParentViewModelId = Guid.NewGuid();
                 parentViewModel.Databook = new Databooks()
                 {
+                    MultipleModels = false,
                     Title = parentViewModel.Databook.Title,
                     Color = parentViewModel.Databook.Color,
                     Description = parentViewModel.Databook.Description
@@ -62,7 +63,7 @@ namespace GoLogData.Controllers
                 //_context.Add(parentViewModel.DataModel);
                 _context.Add(parentViewModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Databooks");
             }
             return View(parentViewModel);
         }
