@@ -1,20 +1,31 @@
-﻿@model GoLogData.Models.DataModel
+﻿@model GoLogData.Models.Datacell
 
 @{
     ViewData["Title"] = "Add Data";
+    var datamodelid = Url.ActionContext.RouteData.Values["id"];
+    
 }
 
 <h1>AddData</h1>
 <hr />
 
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="AddData">
-           <div class="form-group">
-               <label style="font-bold" asp-for"">@Model.Label</label>
-               <br />
-
-           </div>
+    <div class="col-md-4">  
+        <form method="post" asp-action="CreateDataCell">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label style="font-bold" asp-for="@Model.input"></label>
+                <br />
+                <input asp-for="@Model.input" />
+                <span asp-validation-for="@Model.input"></span>
+                <br />
+                <input type="hidden" name="modelId" value="@datamodelid" />
+                
+                
+                
+                
+                <input type="submit" value="CreateDataCell" class="btn btn-primary" />
+            </div>
         </form>
     </div>
 </div>

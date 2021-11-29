@@ -1,6 +1,7 @@
 ﻿using GoLogData.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using GoLogData.Models;
 
 namespace GoLogData.Controllers
 {
@@ -33,6 +34,38 @@ namespace GoLogData.Controllers
         {
             return View();
         }
+        
+       public async Task<IActionResult> CreateDataCell(string input, Guid modelId) 
+       {
+            //what do we need to create datacell? input and maybe the datamodelId
+            if (ModelState.IsValid)
+            {
+                
+                await using(var context = _context)
+                {
+                    //DataModel query = (DataModel)(from dm in context.DataModels
+                    //                              where dm.ModelId == modelId
+                    //                              select dm);
+                    DataModel x = context
+                        .ParentViewModels
+                        .Where(u=>u.DataModel.ModelId == modelId)
+                        .Select(u => u.DataModel)
+                        .SingleOrDefault();
+                    var newDataCell = new Datacell()
+                    {
+                        input = input,
+                        Id = Guid.NewGuid(),
+                        //get data from database where datamodle = modelId
+                        DataModel = x // making issues
+                    };
+                    context.Add(newDataCell);
+                    await context.SaveChangesAsync();
+                    return RedirectToAction("Index", "DataBooks");
+                }
+
+            }
+            return View();
+       }
 
         // GET: DataModelController/Create
         public ActionResult Create()
