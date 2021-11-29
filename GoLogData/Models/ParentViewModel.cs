@@ -7,6 +7,8 @@ namespace GoLogData.Models
 
         public Databooks? Databook { get; set; }
 
+        public Datacell? Datacell { get; set; }
+
         public DataModel? DataModel {  get; set; }
         [Key]
         public Guid ParentViewModelId {  get; set; }

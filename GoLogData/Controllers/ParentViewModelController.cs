@@ -83,6 +83,7 @@ namespace GoLogData.Controllers
                 List<DataModel> answer = query.ToList<DataModel>();
                 
                 ViewData["dataModels"] = answer;
+                ViewData["DatabookId"] = id;
 
             }
             
@@ -126,5 +127,47 @@ namespace GoLogData.Controllers
                 return View();
             }
         }
+        public ActionResult AddData(Guid modelId)
+        {
+            return View();
+        }
+        public ActionResult AddModel()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddModel(Guid Id, DataModel dm)
+        {
+            //create new model based on inputs and databookId
+            //this is getting called as soon as page loads cause validaton to be off
+            
+                
+                await using(var context = _context)
+                {
+                    Databooks x = context
+                        .ParentViewModels
+                        .Where(u=>u.Databook.Id == Id)
+                        .Select(u=>u.Databook)
+                        .SingleOrDefault(); // turning the databook Id passed into a databook object
+
+
+                    DataModel addedModel = new DataModel()
+                    {
+                        ModelId = Guid.NewGuid(),
+                        Databooks = x, 
+                        Label = dm.Label,
+                        Title = dm.Title,
+                        Description = dm.Description,
+                    };
+                    _context.Add(addedModel);
+                    await _context.SaveChangesAsync();
+                }
+                return RedirectToAction("Index", "DataBooks");
+            
+
+            //save to database 
+            
+        }
+        
     }
 }

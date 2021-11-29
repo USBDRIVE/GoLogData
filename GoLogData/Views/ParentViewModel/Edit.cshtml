@@ -7,12 +7,14 @@
 @{
     //cast viewdata as list
     var dataModelList = ViewData["dataModels"] as List<DataModel>;
+    var databookId = ViewData["DatabookId"];
+
 
 }
 <div>
     <h1>Edit</h1>
     <div style="right: 150px">
-        <a asp-controller="DataModel" asp-action="AddModel">Add a new DataModel</a>
+        <a asp-controller="ParentViewModel" asp-action="AddModel"  asp-route-id="@databookId">Add a new DataModel</a>
 
     </div>
 </div>
@@ -32,7 +34,7 @@
                        <td>@item.Label</td>
                        <td>@item.Description</td>
                        <td>
-                           <a class="btn btn-primary" asp-controller="DataModel" asp-action="AddData">Add</a>
+                           <a class="btn btn-primary" asp-controller="DataModel" asp-action="AddData" asp-route-id="@item.ModelId">Add</a>
                            <a class="btn btn-danger" asp-controller="DataModel" asp-action="Delete">Delete</a>
                            
                        </td>
