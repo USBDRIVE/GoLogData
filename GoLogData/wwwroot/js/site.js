@@ -14,3 +14,9 @@
     //close but no cigar
 
 //};
+function WikiLookupSubmit() {
+    console.log("function WikiLookupSubmit was called");
+    var val = document.getElementById("wikilookupbox").value;
+    console.log(val);
+
+};
