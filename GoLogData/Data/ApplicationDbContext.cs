@@ -13,8 +13,9 @@ namespace GoLogData.Data
         public DbSet<GoLogData.Models.Databooks> Databook { get; set; }
         public DbSet<GoLogData.Models.ParentViewModel> ParentViewModels{ get; set; }
         public DbSet<GoLogData.Models.DataModel> DataModels{ get; set; }
+        //public DbSet<GoLogData.Models.Datacell> Datacell { get; set; }
         //public virtual Databooks getDatabookFromParent(ParentViewModel parentViewModel) { 
-          //  parentViewModel.Databook
+        //  parentViewModel.Databook
         //}
     }
 }

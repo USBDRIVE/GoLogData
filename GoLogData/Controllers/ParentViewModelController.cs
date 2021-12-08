@@ -45,7 +45,7 @@ namespace GoLogData.Controllers
                 {
                     MultipleModels = false,
                     Title = parentViewModel.Databook.Title,
-                    Color = parentViewModel.Databook.Color,
+                    
                     Description = parentViewModel.Databook.Description
                 };
                 //every databook to have a default basic datamodel
@@ -79,9 +79,17 @@ namespace GoLogData.Controllers
                 var query = from dm in context.DataModels
                             where dm.Databooks.Id == id 
                             select dm;
-                //get DataModel where datamodel.DatabookId = id 
-                List<DataModel> answer = query.ToList<DataModel>();
                 
+                //var query2 = from dc in context.Datacell
+                //             where dc.DataModel == query.FirstOrDefault()
+                //             select dc;
+                //this isnt working for some reason, error says  
+                //get DataModel where datamodel.DatabookId = id 
+                List < DataModel > answer = query.ToList<DataModel>();
+                //List<Datacell> datacells = query2.ToList<Datacell>();
+
+
+                //ViewData["Datacells"] = datacells;
                 ViewData["dataModels"] = answer;
                 ViewData["DatabookId"] = id;
 

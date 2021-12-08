@@ -8,7 +8,7 @@
     //cast viewdata as list
     var dataModelList = ViewData["dataModels"] as List<DataModel>;
     var databookId = ViewData["DatabookId"];
-
+    //var dataCellList = ViewData["Datacells"] as List<Datacell>;
 
 }
 <div>
@@ -55,6 +55,24 @@
         </form>
     </div>
 </div>
+<!--
+<div>
+    <table class="table">
+        <thead>DataCell for current Datamodel</thead>
+        <tbody>
+           @* @foreach(var item in dataCellList)
+            {
+                <tr>
+                    <td>@item.input</td>
+                </tr>
+
+            }*@
+              
+            
+        </tbody>
+    </table>
+</div>
+-->
 <!--
 <div class="modal fade" id="newModelModal" tabindex="-1" role="dialog" aria-labelledby="newModelModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
